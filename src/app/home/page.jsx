@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const Friends = [
   {
@@ -112,15 +113,6 @@ const Friends = [
   },
 ];
 
-const statusStyles = {
-  on_track: "bg-green-500 text-white",
-  overdue: "bg-red-500 text-white",
-};
-
-const statusLabels = {
-  on_track: "On Track",
-  overdue: "Overdue",
-};
 
 const Homepage = () => {
   return (
@@ -128,8 +120,8 @@ const Homepage = () => {
       <div className="max-w-6xl mx-auto py-10 px-4">
         <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           {Friends.map((friend) => (
-            <div
-              className="p-4 text-center rounded-2xl shadow-md bg-white hover:shadow-xl transition duration-300"
+            <Link  href={`/home/${friend.id}`}
+              className="p-4 text-center rounded-2xl shadow-md bg-white hover:shadow-xl transition duration-300 cursor-pointer"
               key={friend.id}
             >
               <Image
@@ -148,8 +140,10 @@ const Homepage = () => {
               </p>
 
               {/* Status Badge */}
+
               
-            </div>
+              
+            </Link>
           ))}
         </div>
       </div>

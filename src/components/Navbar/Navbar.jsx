@@ -16,7 +16,7 @@ const Navbar = () => {
           {/* LEFT: Logo */}
           <div className="flex-1">
             <Link href="/">
-              <Image src="/logo.png" alt="logo" width={80} height={80} />
+              <Image src="/logo.png" alt="logo" width={100} height={100} />
             </Link>
           </div>
 

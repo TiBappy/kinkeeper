@@ -1,6 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { MdCall, MdOutlineTextsms,   } from "react-icons/md";
+import { FaVideo } from "react-icons/fa6";
+import { RiDeleteBinLine, RiNotificationSnoozeFill } from "react-icons/ri";
+import { LuArchive } from "react-icons/lu";
 
 const Friends = [
   {
@@ -113,16 +117,27 @@ const Friends = [
   },
 ];
 
+const getStatusStyle = (status) => {
+  if (status === "on_track") {
+    return "bg-[#244D3F] text-white p-4";
+  } else if (status === "almost_due") {
+    return "bg-yellow-400 text-black";
+  } else if (status === "overdue") {
+    return "bg-red-500 text-white";
+  } else {
+    return "bg-gray-300 text-black";
+  }
+};
 const FriendDetailspage = async ({ params }) => {
   const { id } = await params;
   const friend = Friends.find((friend) => friend.id === parseInt(id));
   console.log("show me params", friend);
   return (
-    <div className="bg-green-50">
+    <div className="bg-[#F8FAFC]">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-12 gap-4 w-full">
-          <div className="col-span-4 bg-green-300 p-4 space-y-5">
-            <div className="cards text-center">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 w-full">
+          <div className="md:col-span-4 p-4 space-y-5">
+            <div className="cards text-center bg-white shadow-sm rounded-lg">
               <Image
                 src={friend.picture}
                 alt={friend.name}
@@ -132,45 +147,58 @@ const FriendDetailspage = async ({ params }) => {
               ></Image>
               <h2 className="text-xl font-semibold my-3">{friend.name}</h2>
               <div className="flex flex-col gap-4">
-                <div className="badge badge-soft badge-info mx-auto">
-                  {friend.status}
+                <div
+                  className={`mx-auto px-3 py-1 rounded-full text-xs p-4 ${getStatusStyle(
+                    friend.status,
+                  )}`}
+                >
+                  {friend.status.replace("_", " ")}
                 </div>
                 <div className="badge badge-soft badge-success mx-auto">
                   {friend.tags[0]}
                 </div>
               </div>
-              <h1>{friend.bio}</h1>
+              <h1 className="italic mt-4">{friend.bio}</h1>
               <p>email</p>
             </div>
-            <div className="bg-white shadow-2xl py-4 text-center">
+            <div className="bg-white shadow-sm py-3 text-center flex justify-center gap-3">
+              <RiNotificationSnoozeFill className="text-2xl"></RiNotificationSnoozeFill>
               <h1>Snooze 2 Weeks</h1>
             </div>
-            <div className="bg-white shadow-lg py-4 text-center">
+            <div className="bg-white shadow-sm py-3 text-center flex justify-center gap-3">
+              <LuArchive className="text-2xl"></LuArchive>
               <h1>Archive</h1>
             </div>
-            <div className="bg-white shadow-lg py-4 text-center">
+            <div className="bg-white shadow-sm py-3 text-center flex justify-center gap-3">
+              <RiDeleteBinLine className="text-2xl"></RiDeleteBinLine>
               <h1>Delete</h1>
             </div>
           </div>
-          <div className="col-span-8 bg-red-200 p-4">
-            <div className="grid grid-cols-3 gap-4">
-              <div className="bg-yellow-400">
-                <h1>{friend.days_since_contact}</h1>
+          <div className="md:col-span-8 p-4 space-y-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              <div className=" text-center p-6 shadow-sm rounded-lg bg-white">
+                <h1 className="text-2xl font-bold text-[#1d4235]">
+                  {friend.days_since_contact}
+                </h1>
                 <p>Days Scince Contact</p>
               </div>
-              <div className="bg-blue-600">
-                <h1>{friend.goal}</h1>
+              <div className="text-center p-6 shadow-sm bg-white rounded-lg">
+                <h1 className="text-2xl font-bold text-[#1d4235]">
+                  {friend.goal}
+                </h1>
                 <p>Goal(Days)</p>
               </div>
-              <div className="bg-purple-400">
-                <h1>{friend.next_due_date}</h1>
+              <div className="text-center p-6 shadow-sm bg-white rounded-lg">
+                <h1 className="text-2xl font-bold text-[#1d4235] ">
+                  {friend.next_due_date}
+                </h1>
                 <p>Next Due</p>
               </div>
             </div>
-            <div className="bg-cyan-300">
+            <div className="shadow-sm p-6 rounded-lg bg-white">
               <div className="flex justify-between items-center">
-                <h1>Relationship Goal</h1>
-                <button className="btn btn-ghost">Edit</button>
+                <h1 className="text-lg font-semibold">Relationship Goal</h1>
+                <button className="btn hidden md:flex">Edit</button>
               </div>
               <p>
                 Contact Every{" "}
@@ -178,23 +206,39 @@ const FriendDetailspage = async ({ params }) => {
               </p>
             </div>
             {/* Dyanmic Section */}
-            <div className="bg-cyan-100">
-              <div><p>Quick Check In</p></div>
-              <div className="grid grid-cols-3">
-                <div>
-                  <Link href={`/timeline?type=call&id=${friend.id}&name=${friend.name}&status=${friend.status}`}>Call</Link>
+            <div className="shadow-sm mt-5 bg-white rounded-lg p-6">
+              <div>
+                <p className="text-[#244D3F] font-semibold mb-3 px-5">Quick Check In</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 px-4 gap-4">
+                <div className="bg-[#F8FAFC] shadow-sm text-center p-4">
+                  <Link
+                    href={`/timeline?type=call&id=${friend.id}&name=${friend.name}&status=${friend.status}`}
+                  >
+                    <MdCall className="mx-auto mb-3 text-2xl"></MdCall>
+                    Call
+                  </Link>
                 </div>
-                <div>
-                  <Link href={`/timeline?type=text&id=${friend.id}&name=${friend.name}&status=${friend.status}`}>Text</Link>
+                <div className="bg-[#F8FAFC] shadow-sm text-center p-4">
+                  <Link
+                    href={`/timeline?type=text&id=${friend.id}&name=${friend.name}&status=${friend.status}`}
+                  >
+                    <MdOutlineTextsms className="mx-auto mb-3 text-2xl"></MdOutlineTextsms>
+                    Text
+                  </Link>
                 </div>
-                <div>
-                  <Link href={`/timeline?type=video&id=${friend.id}&name=${friend.name}&status=${friend.status}`}>Video</Link>
+                <div className="bg-[#F8FAFC] shadow-sm text-center p-4">
+                  <Link
+                    href={`/timeline?type=video&id=${friend.id}&name=${friend.name}&status=${friend.status}`}
+                  >
+                    <FaVideo className="mx-auto mb-3 text-2xl"></FaVideo>
+
+                    Video
+                  </Link>
                 </div>
               </div>
             </div>
-            <div>
-                <p>this is updated</p>
-            </div>
+           
           </div>
         </div>
       </div>

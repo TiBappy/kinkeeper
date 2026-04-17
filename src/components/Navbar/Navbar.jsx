@@ -1,4 +1,7 @@
-import NavLink from "./NavLink";
+"use client";
+
+import Link from "next/link";
+import NavLink from "../NavLink";
 import Image from "next/image";
 import { FaHouse } from "react-icons/fa6";
 import { RiTimeLine } from "react-icons/ri";
@@ -9,23 +12,22 @@ const Navbar = () => {
     <div className="bg-base-100 shadow-sm">
       <div className="max-w-6xl mx-auto">
         <div className="navbar">
+          
           {/* LEFT: Logo */}
           <div className="flex-1">
-            <NavLink href="/">
+            <Link href="/">
               <Image src="/logo.png" alt="logo" width={80} height={80} />
-            </NavLink>
+            </Link>
           </div>
 
-          {/* RIGHT: Mobile Hamburger */}
+          {/* RIGHT: Mobile Menu */}
           <div className="flex-none md:hidden">
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost text-xl">
                 ☰
               </label>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-              >
+
+              <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                 <li>
                   <NavLink href="/">
                     <FaHouse /> Home
@@ -65,6 +67,7 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
+
         </div>
       </div>
     </div>

@@ -6,14 +6,25 @@ import { usePathname } from "next/navigation";
 const NavLink = ({ href, children }) => {
   const pathname = usePathname();
 
-  const isActive = pathname === href;
+  // normalize paths (remove trailing slash)
+  const normalize = (path) => path.replace(/\/$/, "") || "/";
+
+  const currentPath = normalize(pathname);
+  const targetPath = normalize(href);
+
+  // active logic
+  const isActive =
+    targetPath === "/"
+      ? currentPath === "/"
+      : currentPath === targetPath ||
+        currentPath.startsWith(targetPath + "/");
 
   return (
     <Link
       href={href}
-      className={`px-3 py-2 rounded ${
+      className={`flex items-center gap-2 px-3 py-2 transition-all duration-200 ${
         isActive
-          ? "bg-[#244D3F] text-white"
+          ? "text-white font-semibold bg-[#244D3F]"
           : "text-gray-600 hover:text-black"
       }`}
     >

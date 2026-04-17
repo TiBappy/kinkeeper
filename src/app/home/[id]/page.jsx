@@ -5,6 +5,9 @@ import { MdCall, MdOutlineTextsms,   } from "react-icons/md";
 import { FaVideo } from "react-icons/fa6";
 import { RiDeleteBinLine, RiNotificationSnoozeFill } from "react-icons/ri";
 import { LuArchive } from "react-icons/lu";
+import { ToastContainer, toast } from 'react-toastify';
+
+
 
 const Friends = [
   {
@@ -159,19 +162,19 @@ const FriendDetailspage = async ({ params }) => {
                 </div>
               </div>
               <h1 className="italic mt-4">{friend.bio}</h1>
-              <p>email</p>
+              <p className="text-sm pb-3">{friend.email}</p>
             </div>
             <div className="bg-white shadow-sm py-3 text-center flex justify-center gap-3">
               <RiNotificationSnoozeFill className="text-2xl"></RiNotificationSnoozeFill>
-              <h1>Snooze 2 Weeks</h1>
+              <button className="cursor-pointer">Snooze 2 Weeks</button>
             </div>
             <div className="bg-white shadow-sm py-3 text-center flex justify-center gap-3">
               <LuArchive className="text-2xl"></LuArchive>
-              <h1>Archive</h1>
+              <button className="cursor-pointer">Archive</button>
             </div>
             <div className="bg-white shadow-sm py-3 text-center flex justify-center gap-3">
               <RiDeleteBinLine className="text-2xl"></RiDeleteBinLine>
-              <h1>Delete</h1>
+              <button className="cursor-pointer">Delete</button>
             </div>
           </div>
           <div className="md:col-span-8 p-4 space-y-5">

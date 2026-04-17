@@ -1,4 +1,4 @@
-import Link from "next/link";
+import NavLink from "./NavLink";
 import Image from "next/image";
 import { FaHouse } from "react-icons/fa6";
 import { RiTimeLine } from "react-icons/ri";
@@ -11,9 +11,9 @@ const Navbar = () => {
         <div className="navbar">
           {/* LEFT: Logo */}
           <div className="flex-1">
-            <Link href="/">
+            <NavLink href="/">
               <Image src="/logo.png" alt="logo" width={80} height={80} />
-            </Link>
+            </NavLink>
           </div>
 
           {/* RIGHT: Mobile Hamburger */}
@@ -27,19 +27,19 @@ const Navbar = () => {
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
               >
                 <li>
-                  <Link href="/">
+                  <NavLink href="/">
                     <FaHouse /> Home
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link href="/timeline">
+                  <NavLink href="/timeline">
                     <RiTimeLine /> Timeline
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link href="/stats">
+                  <NavLink href="/stats">
                     <ImStatsDots /> Stats
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
             </div>
@@ -49,19 +49,19 @@ const Navbar = () => {
           <div className="flex-none hidden md:block">
             <ul className="menu menu-horizontal px-1">
               <li>
-                <Link href="/">
+                <NavLink href="/">
                   <FaHouse /> Home
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link href="/timeline">
+                <NavLink href="/timeline">
                   <RiTimeLine /> Timeline
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link href="/stats">
+                <NavLink href="/stats">
                   <ImStatsDots /> Stats
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </div>
